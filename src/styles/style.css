@@ -19,6 +19,16 @@ body {
     color: white !important;
 }
 
+.list-group-item-salmon {
+    transition: .2s;
+}
+
+.list-group-item-salmon:hover {
+    cursor: pointer;
+    background-color: salmon !important;
+    color: white !important;
+}
+
 .btn-salmon:hover {
     background-color: rgb(230, 117, 104) !important;
 }

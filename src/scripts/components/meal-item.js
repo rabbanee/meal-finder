@@ -8,6 +8,12 @@ class MealItem extends HTMLElement {
         this.render();
     }
 
+    set clickEvent(e) {
+        this._clickEvent = e;
+        this.render();
+    }
+
+
     render() {
         this.innerHTML = `
             <img class="meal-thumb" src="${this._meal.strMealThumb}" alt="Meal Thumb">
@@ -21,8 +27,7 @@ class MealItem extends HTMLElement {
                 </button>
             </div>
         `;
-        this.querySelector('.btn-detail-meal').addEventListener('click', function () {
-            console.log(this.getAttribute('data-idMeal'));
+        this.querySelector('.btn-detail-meal').addEventListener('click', function onButtonDetailClicked() {
             DataSource.searchMealById(this.getAttribute('data-idMeal'))
                 .then(result => {
                     let r = result[0];
@@ -31,7 +36,7 @@ class MealItem extends HTMLElement {
                     mealDetailElement.meal = r;
                     $('#myModal').modal('show');
                 })
-                .catch(main.renderResultDetail);
+                .catch(main.renderResultDetail);;
         });
     }
 }

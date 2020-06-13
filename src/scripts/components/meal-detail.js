@@ -8,6 +8,20 @@ class MealDetail extends HTMLElement {
         this.render();
     }
     render() {
+        function strIngredient(meal) {
+            let result = '';
+            let keys = Object.keys(meal);
+            for (let index = 0; index < 20; index++) {
+                let str = keys[9 + index];
+                let str2 = keys[29 + index];
+                if (meal[str] === '') {
+                    break;
+                }
+                result += `<li class="list-group-item list-group-item-salmon">${ meal[str2]}  ${meal[str]}</li>`;
+
+            }
+            return result;
+        }
         this.innerHTML = `
              <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
@@ -20,12 +34,21 @@ class MealDetail extends HTMLElement {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p><b>Tags:</b> ${this._meal == undefined ? '' : 
-                            this._meal.strTags
-                        }</p>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Tags : ${this._meal == undefined ? '' : this._meal.strTags == null ? '-' : this._meal.strTags}</p>
+                                    <p>Recipes: </p>
+                                    <ul class="list-group">
+                                        ${this._meal == undefined ? '' : strIngredient(this._meal)}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="${this._meal == undefined ? '' :this._meal.strYoutube}" class="btn btn-salmon" target="_blank">View video</a>
                     </div>
                     </div>
                 </div>
